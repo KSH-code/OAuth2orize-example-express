@@ -43,8 +43,13 @@ server.serializeClient((client, done) => {
   console.log(client)
   done(null, client)
 })
+server.deserializeClient((id, done) => {
+  console.log('deserializeClient')
+  console.log(id)
+  done(null, id)
+})
 server.grant(oauth2orize.grant.code((client, redirectUri, user, ares, done) => {
-  console.log('grant.code')
+  console.log('authorization code type')
   console.log(client)
   console.log(redirectUri)
   console.log(user)
@@ -62,8 +67,23 @@ server.exchange(oauth2orize.exchange.refreshToken((client, refreshToken, scope, 
   console.log(scope)
   if (refreshToken === 'refresh_token') done(null, '2nd access_token', null, 3600)
 }))
+server.exchange(oauth2orize.exchange.password((client, username, password, scope, done) => {
+  console.log('resource owner password credntials type')
+  console.log(client)
+  console.log(username)
+  console.log(password)
+  console.log(scope)
+  if (username === 'name' && password === 'pw') done(null, '1st access_token', 'refresh_token', 3600)
+}))
 
 app.post('/token', (req, res, next) => {
+  console.log('req.body.grant_type: ', req.body.grant_type)
+  if (req.user === undefined) {
+    console.log('req.user === undefined')
+    req.user = {
+      clientId: 'ab'
+    }
+  }
   next()
 }, server.token(server))
 app.listen(7001, () => {

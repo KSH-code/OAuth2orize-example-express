@@ -26,4 +26,18 @@ describe('/token', () => {
       done()
     })
   })
+  it('resource owner password credentials type', done => {
+    request.post('http://localhost:7001/token', { form: {
+      redirect_uri: 'http://localhost:7001',
+      grant_type: 'password',
+      username: 'name',
+      password: 'pw',
+      scope: 'scope',
+      client_id: 'client_id'
+    }}, (err, res, body) => {
+      if (err) console.error(err)
+      checkEqual('{"access_token":"1st access_token","refresh_token":"refresh_token","token_type":"Bearer"}', res.body)
+      done()
+    })
+  })
 })
