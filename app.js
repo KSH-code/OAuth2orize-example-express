@@ -54,13 +54,17 @@ server.grant(oauth2orize.grant.code((client, redirectUri, user, ares, done) => {
 }))
 
 server.exchange(oauth2orize.exchange.code((client, code, redirectUri, done) => {
-  done(null, 'token', 'refresh_token', 3600)
+  done(null, '1st access_token', 'refresh_token', 3600)
+}))
+server.exchange(oauth2orize.exchange.refreshToken((client, refreshToken, scope, done) => {
+  console.log('refresh token type')
+  console.log(client)
+  console.log(scope)
+  if (refreshToken === 'refresh_token') done(null, '2nd access_token', null, 3600)
 }))
 
 app.post('/token', (req, res, next) => {
-  if (req.body.code === 'code') {
-    next()
-  }
+  next()
 }, server.token(server))
 app.listen(7001, () => {
   console.log('server is running')
