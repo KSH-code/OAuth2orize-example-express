@@ -5,7 +5,7 @@ exports.verify = token => {
   try {
     return Jwt.verify(token, secretKey)
   } catch (err) {
-    return false;
+    return false
   }
 }
 exports.encrypt = object => {

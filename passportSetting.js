@@ -7,6 +7,7 @@ const { verify: JwtVerify } = require('./util')
 
 // authenticate users based on a username and password
 passport.use(new LocalStrategy((username, password, done) => {
+  console.log('/login')
   if (username === 'name' && password === 'pw') {
     done(null, {
       username,
@@ -27,7 +28,8 @@ function clientCheck (clientId, clientSecret, done) {
 // clientSecret is client's password
 passport.use(new BasicStrategy(clientCheck))
 passport.use(new ClientPasswordStrategy(clientCheck))
-// verify bearer access token 
+
+// verify bearer access token
 passport.use(new BearerStrategy((accessToken, done) => {
   if (JwtVerify(accessToken)) {
     done(null, accessToken)
