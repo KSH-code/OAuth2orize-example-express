@@ -19,13 +19,19 @@ require('./passportSetting')
 
 app.get('/', (req, res) => {
   console.log('hello this page is root page')
+  console.log(req.query)
   res.status(200).end()
 })
 app.get('/login', (req, res) => {
   console.log('hello this page is login page')
 })
-app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }))
-app.post('/authorize', oauth2.authorization)
+app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
+  const { continue: continueUri } = req.query
+  if (continueUri) {
+    res.redirect(302, continueUri)
+  }
+})
+app.all('/authorize', oauth2.authorization)
 
 app.listen(7001, () => {
   console.log('server is running')
