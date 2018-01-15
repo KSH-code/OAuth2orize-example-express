@@ -1,0 +1,39 @@
+{
+  "name": "oauth2orize-example-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "standard": "standard \"./*.js\" \"./test/*.js\"",
+    "start": "npm run standard && gulp",
+    "test": "npm run standard && gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KSH-code/OAuth2orize-example-express.git"
+  },
+  "keywords": [
+    "oauth2orize"
+  ],
+  "author": "ksh-code <tjdgnsqn133@gmail.com> (http://github.com/ksh-code)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KSH-code/OAuth2orize-example-express/issues"
+  },
+  "homepage": "https://github.com/KSH-code/OAuth2orize-example-express#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "easily-expect": "^0.1.5",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^5.0.0",
+    "gulp-nodemon": "^2.2.1",
+    "oauth2orize": "^1.11.0",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "mocha": "^4.1.0",
+    "standard": "^10.0.3"
+  }
+}
