@@ -9,7 +9,7 @@ nodemon({
 gulp.task('default', cb => {
 })
 gulp.task('test', cb => {
-  return gulp.src('test/*.test.js', { read: false })
+  return gulp.src('test/index.js', { read: false })
     .pipe(mocha({
       reporter: 'spec'
     }))

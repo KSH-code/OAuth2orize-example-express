@@ -9,5 +9,5 @@ exports.verify = token => {
   }
 }
 exports.encrypt = object => {
-  Jwt.sign(object, secretKey)
+  return Jwt.sign(object, secretKey)
 }
